@@ -47,12 +47,27 @@ export class AuthService{
         }
     }
 
-    
-}
 
+    async getCurrentUser(){
+           try {
+               await this.account.get()
+           } catch (error) {
+             throw error
+           }
+           // even if the try catch have some problematic situaltion that is why
+           return null
+    }
 
+    async logout(){
+        try {
+            this.account.deleteSessions()
+        } catch (error) {
+            console.log("App write has logout error");
+        }
+    }
+   }
 
-// now create an object from the instance of the above class and export the object so that anyone can run the methods on the imported object
+   // now create an object from the instance of the above class and export the object so that anyone can run the methods on the imported object
 
 const authService = new AuthService()
 export default authService;
